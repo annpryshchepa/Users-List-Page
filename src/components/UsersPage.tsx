@@ -1,8 +1,8 @@
-import { HOME_CRUMB, USERS_CRUMB, JIRA_LINK } from '@/lib/constants';
 import Link from 'next/link';
 import Image from 'next/image';
 import { MainLink, Breadcrumbs, SelectAction } from '@/components';
 import userLogo from '../images/user.svg';
+import { HOME_CRUMB, USERS_CRUMB, JIRA_LINK, UserType } from '@/lib/constants';
 
 import {
   Table,
@@ -13,8 +13,8 @@ import {
   TableRow,
 } from '@/components/ui/table';
 
-export const UsersPage = ({ data }) => {
-  const crumbsItems = [HOME_CRUMB, { label: USERS_CRUMB.label }];
+export const UsersPage = ({ data }: { data: UserType[] }) => {
+  const crumbsItems = [HOME_CRUMB, { href: '', label: USERS_CRUMB.label }];
 
   return (
     <div className='p-5 flex flex-col gap-4 md:gap-10'>

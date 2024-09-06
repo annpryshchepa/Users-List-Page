@@ -12,3 +12,14 @@ export const ACTIONS = {
   figma: GO_TO_FIGMA,
   jira: TASKS_IN_JIRA,
 };
+
+// Types
+export type RoleType = 'Developer' | 'Designer' | 'Product Manager';
+export type PlanType = 'Basic' | 'Premium';
+export type UserType = {
+  name: string;
+  id: number;
+  email: string;
+  role: RoleType;
+  plan: PlanType;
+};

@@ -1,6 +1,10 @@
 import Image from 'next/image';
+import type {
+  InferGetServerSidePropsType,
+  GetServerSidePropsContext,
+} from 'next';
 import { useEffect, useState } from 'react';
-import { HOME_CRUMB, USERS_CRUMB, JIRA_LINK } from '@/lib/constants';
+import { HOME_CRUMB, USERS_CRUMB, JIRA_LINK, UserType } from '@/lib/constants';
 import { MainLink, MainButton, Spinner } from '@/components';
 import { Breadcrumbs } from '@/components/BreadCrumb';
 import userLogo from '../../images/user.svg';
@@ -12,22 +16,24 @@ const UserInfo = ({ label, text }: { label: string; text: string }) => (
   </p>
 );
 
-export default function User({ data }) {
+export default function User({
+  data,
+}: InferGetServerSidePropsType<typeof getServerSideProps>) {
   const [isLoading, setIsLoading] = useState(true);
   const crumbsItems = [
     HOME_CRUMB,
     USERS_CRUMB,
-    { label: data?.name ?? 'Not found' },
+    { href: '', label: data?.name ?? 'Not found' },
   ];
 
   // simulates resolve api call on UI
   useEffect(() => {
     const timer = setTimeout(() => {
-      setIsLoading(!isLoading);
+      setIsLoading((prevState) => !prevState);
     }, 3000);
 
     return () => clearTimeout(timer);
-  });
+  }, []);
 
   return isLoading ? (
     <div className='w-full h-screen flex justify-center items-center'>
@@ -91,19 +97,19 @@ export default function User({ data }) {
   );
 }
 
-export async function getServerSideProps(context) {
-  const { userId } = context.params;
+export async function getServerSideProps(context: GetServerSidePropsContext) {
+  const { userId } = context.params!;
 
-  // simulate api request
+  // simulate API request
   const fetchUser = () =>
-    new Promise((resolve) => {
+    new Promise<UserType[]>((resolve) => {
       setTimeout(() => {
-        resolve(users);
+        resolve(users as unknown as UserType[]);
       }, 3000);
     });
 
-  const data = await fetchUser();
-  const user = data?.find((user) => user.id.toString() === userId[0]) ?? null;
+  const data = (await fetchUser()) as unknown as UserType[];
+  const user = data.find((user) => user.id.toString() === userId?.[0]) ?? null;
 
   return {
     props: {

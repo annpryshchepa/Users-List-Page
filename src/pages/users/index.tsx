@@ -1,8 +1,9 @@
 import { useState, useEffect } from 'react';
 import { users } from '../../db/users';
 import { UsersPage } from '@/components';
+import { UserType } from '@/lib/constants';
 
-export default function Users({ data }) {
+export default function Users({ data }: { data: UserType[] }) {
   const [isClient, setIsClient] = useState(false);
 
   useEffect(() => {

@@ -7,7 +7,10 @@ import {
   GO_TO_FIGMA,
   TASKS_IN_JIRA,
   JIRA_LINK,
+  RoleType,
+  PlanType,
 } from '@/lib/constants';
+
 
 type ActionTypes = keyof typeof ACTIONS;
 
@@ -16,8 +19,8 @@ export const SelectAction = ({
   plan,
   id,
 }: {
-  role: 'Developer' | 'Designer' | 'Product Manager';
-  plan: 'Basic' | 'Premium';
+  role: RoleType;
+  plan: PlanType;
   id: number;
 }) => {
   const handleChangeAction = (action: ActionTypes) => {

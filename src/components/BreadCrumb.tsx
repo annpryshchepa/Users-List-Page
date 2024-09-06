@@ -10,19 +10,17 @@ import {
 } from '@/components/ui/breadcrumb';
 
 type BreadCrumbsType = {
-  crumbs: [
-    {
-      href?: string;
-      label: string;
-    }
-  ];
+  crumbs: {
+    href: string;
+    label: string;
+  }[];
 };
 
 export const Breadcrumbs = ({ crumbs }: BreadCrumbsType) => (
   <Breadcrumb className='bg-gray-200/30 p-3 h-fit w-full'>
     <BreadcrumbList>
       {crumbs.map((item, index) => (
-        <BreadcrumbItem key={item}>
+        <BreadcrumbItem key={item.label}>
           {item.href ? (
             <>
               <BreadcrumbLink
