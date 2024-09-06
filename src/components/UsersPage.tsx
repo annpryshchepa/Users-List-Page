@@ -1,7 +1,7 @@
 import { HOME_CRUMB, USERS_CRUMB, JIRA_LINK } from '@/lib/constants';
 import Link from 'next/link';
 import Image from 'next/image';
-import { MainLink, MainButton, Breadcrumbs } from '@/components';
+import { MainLink, Breadcrumbs, SelectAction } from '@/components';
 import userLogo from '../images/user.svg';
 
 import {
@@ -69,7 +69,7 @@ export const UsersPage = ({ data }) => {
           <TableBody>
             {data.map((user) => (
               <TableRow key={user.id}>
-                <TableCell className=''>
+                <TableCell>
                   <Link href={`/users/${user.id}`}>{user.name}</Link>
                 </TableCell>
                 <TableCell>
@@ -81,11 +81,15 @@ export const UsersPage = ({ data }) => {
                 <TableCell>
                   <Link href={`/users/${user.id}`}>{user.role}</Link>
                 </TableCell>
-                <TableCell className=''>
+                <TableCell>
                   <Link href={`/users/${user.id}`}>{user.plan}</Link>
                 </TableCell>
-                <TableCell className=''>
-                  <MainButton label='Actions' isPrimary={true} />
+                <TableCell>
+                  <SelectAction
+                    role={user.role}
+                    plan={user.plan}
+                    id={user.id}
+                  />
                 </TableCell>
               </TableRow>
             ))}
