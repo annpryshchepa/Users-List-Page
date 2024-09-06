@@ -18,7 +18,7 @@ type BreadCrumbsType = {
   ];
 };
 
-export const Breadcrumbs = ({ crumbs = [] }: BreadCrumbsType) => (
+export const Breadcrumbs = ({ crumbs }: BreadCrumbsType) => (
   <Breadcrumb className='bg-gray-200/30 p-3 h-fit w-full'>
     <BreadcrumbList>
       {crumbs.map((item, index) => (
