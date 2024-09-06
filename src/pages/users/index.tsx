@@ -21,6 +21,6 @@ export async function getStaticProps() {
     props: {
       data,
     },
-    revalidate: 3600, // Revalidate every 1h
+    // revalidate: 3600, // Revalidate every 1h -> commented in order to be deployed to github pages
   };
 }
